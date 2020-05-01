@@ -16,6 +16,7 @@ function printCharts(coasters) {
   heightRadarChart(coasters, "chart3");
   GForceBarsChart(coasters, "chart5");
   countriesRadarChart(coasters, "chart1");
+  yearsBarsChart(coasters, "chart6");
 }
 
 function compareRadioChart(coasters, id) {
@@ -186,7 +187,7 @@ function countriesRadarChart(coasters, id) {
         data: selectedCoasters.map((eachCoaster) => eachCoaster.length),
         borderColor: styles.color.solids[1],
         backgroundColor: styles.color.alphas[1],
-        hidden: true
+        hidden: true,
       },
       {
         label: "Inversiones",
@@ -211,12 +212,132 @@ function countriesRadarChart(coasters, id) {
 
   const options = {
     legend: {
-      position: 'left'
+      position: "left",
+    },
+  };
+
+  new Chart(id, {
+    type: "radar",
+    data,
+    options,
+  });
+}
+
+function yearsBarsChart(coasters, id) {
+  const data = {
+    labels: [
+      "1995-1997",
+      "1998-2000",
+      "2001-2003",
+      "2004-2006",
+      "2007-2009",
+      "2013-2015",
+      "2016-2018",
+      "2019-2021",
+    ],
+    datasets: [
+      {
+        label: "Montañas creadas",
+        borderColor: styles.color.solids[5],
+        backgroundColor: styles.color.alphas[5],
+        data: [
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 1995 && eachCoaster.year <= 1997
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 1998 && eachCoaster.year <= 2000
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2001 && eachCoaster.year <= 2003
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2004 && eachCoaster.year <= 2006
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2007 && eachCoaster.year <= 2009
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2013 && eachCoaster.year <= 2015
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2016 && eachCoaster.year <= 2018
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2019 && eachCoaster.year <= 2021
+          ).length,
+        ],
+      },
+      {
+        type: 'bar',
+        label: "Aceleración",
+        borderColor: styles.color.solids[3],
+        backgroundColor: styles.color.alphas[3],
+        data: [
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 1995 && eachCoaster.year <= 1997 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 1998 && eachCoaster.year <= 2000 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2001 && eachCoaster.year <= 2003 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2004 && eachCoaster.year <= 2006 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2007 && eachCoaster.year <= 2009 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2013 && eachCoaster.year <= 2015 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2016 && eachCoaster.year <= 2018 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+          coasters.filter(
+            (eachCoaster) =>
+              eachCoaster.year >= 2019 && eachCoaster.year <= 2021 && eachCoaster.model === 'Hyper Coaster'
+          ).length,
+        ],
+      },
+    ],
+  };
+
+  const options = {
+    mantainAspectRadio: false,
+    scaleFontCOlor: '#fff',
+    scales: {
+      yAxes: [{
+        ticks: {
+          display: true
+        }
+      }],
+      xAxes: [{
+        barPercentage: 0.4,
+        ticks: {
+          display: true
+        }
+      }]
     }
   }
 
   new Chart(id, {
-    type: "radar",
+    type: "line",
     data,
     options
   });
