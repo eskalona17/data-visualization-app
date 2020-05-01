@@ -15,7 +15,7 @@ function printCharts(coasters) {
   modelDoughnutChart(coasters, "chart4");
   heightRadarChart(coasters, "chart3");
   GForceBarsChart(coasters, "chart5");
-  countriesRadarChart(coasters, "chart1")
+  countriesRadarChart(coasters, "chart1");
 }
 
 function compareRadioChart(coasters, id) {
@@ -139,45 +139,85 @@ function GForceBarsChart(coasters, id) {
       {
         data: selectedCoasters.map((eachCoaster) => eachCoaster.gForce),
         backgroundColor: styles.color.alphas,
-        borderColor: styles.color.solids
+        borderColor: styles.color.solids,
       },
     ],
   };
 
   const options = {
     legend: {
-      display: false
+      display: false,
     },
     scales: {
-      yAxes: [{
-        gridLines: {
-          display: false
+      yAxes: [
+        {
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            display: true,
+          },
         },
-        ticks: {
-          display: true
-        }
-      }]
-    }
-  }
+      ],
+    },
+  };
 
   new Chart(id, {
     type: "bar",
     data,
-    options
+    options,
   });
 }
 
-function countriesRadarChart(coasters, id){
-
+function countriesRadarChart(coasters, id) {
   const selectedCoasters = coasters.filter((eachCoaster) => eachCoaster.gForce);
 
   const data = {
-    
+    labels: selectedCoasters.map((eachCoaster) => eachCoaster.name),
+    datasets: [
+      {
+        label: "Altura",
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.height),
+        borderColor: styles.color.solids[0],
+        backgroundColor: styles.color.alphas[0],
+      },
+      {
+        label: "Longitud",
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.length),
+        borderColor: styles.color.solids[1],
+        backgroundColor: styles.color.alphas[1],
+        hidden: true
+      },
+      {
+        label: "Inversiones",
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.inversions),
+        borderColor: styles.color.solids[2],
+        backgroundColor: styles.color.alphas[2],
+      },
+      {
+        label: "Velocidad",
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.speed),
+        borderColor: styles.color.solids[3],
+        backgroundColor: styles.color.alphas[3],
+      },
+      {
+        label: "Fuerza G",
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.gForce),
+        borderColor: styles.color.solids[4],
+        backgroundColor: styles.color.alphas[4],
+      },
+    ],
+  };
+
+  const options = {
+    legend: {
+      position: 'left'
+    }
   }
 
   new Chart(id, {
     type: "radar",
     data,
-    // options
+    options
   });
 }
