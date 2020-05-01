@@ -14,6 +14,8 @@ function printCharts(coasters) {
   compareRadioChart(coasters, "chart2");
   modelDoughnutChart(coasters, "chart4");
   heightRadarChart(coasters, "chart3");
+  GForceBarsChart(coasters, "chart5");
+  countriesRadarChart(coasters, "chart1")
 }
 
 function compareRadioChart(coasters, id) {
@@ -125,5 +127,57 @@ function heightRadarChart(coasters, id) {
     type: "radar",
     data,
     options,
+  });
+}
+
+function GForceBarsChart(coasters, id) {
+  const selectedCoasters = coasters.filter((eachCoaster) => eachCoaster.gForce);
+
+  const data = {
+    labels: selectedCoasters.map((eachCoaster) => eachCoaster.name),
+    datasets: [
+      {
+        data: selectedCoasters.map((eachCoaster) => eachCoaster.gForce),
+        backgroundColor: styles.color.alphas,
+        borderColor: styles.color.solids
+      },
+    ],
+  };
+
+  const options = {
+    legend: {
+      display: false
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          display: true
+        }
+      }]
+    }
+  }
+
+  new Chart(id, {
+    type: "bar",
+    data,
+    options
+  });
+}
+
+function countriesRadarChart(coasters, id){
+
+  const selectedCoasters = coasters.filter((eachCoaster) => eachCoaster.gForce);
+
+  const data = {
+    
+  }
+
+  new Chart(id, {
+    type: "radar",
+    data,
+    // options
   });
 }
