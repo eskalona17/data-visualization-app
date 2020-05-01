@@ -1,3 +1,10 @@
+// defaults
+Chart.defaults.global.defaultFontColor = "#fff";
+Chart.defaults.global.elements.line.borderWidth = 1;
+Chart.defaults.global.elements.rectangle.borderWidth = 1;
+Chart.defaults.scale.gridLines.color = "#444";
+Chart.defaults.scale.ticks.display = false;
+
 fetch("https://coasters-api.herokuapp.com/")
   .then((response) => response.json())
   .then((data) => printCharts(data));
@@ -36,19 +43,8 @@ function compareRadioChart(coasters, id) {
   };
 
   const options = {
-    scale: {
-      gridLines: {
-        color: "#444",
-      },
-      ticks: {
-        display: false,
-      },
-    },
     legend: {
       position: "right",
-      labels: {
-        fontColor: "#fff",
-      },
     },
   };
   new Chart(id, {
@@ -95,9 +91,6 @@ function modelDoughnutChart(coasters, id) {
   const options = {
     legend: {
       position: "right",
-      labels: {
-        fontColor: "#fff",
-      },
     },
   };
   new Chart(id, {
@@ -117,22 +110,13 @@ function heightRadarChart(coasters, id) {
       {
         label: "Altura",
         data: selectedCoasters.map((eachCoaster) => eachCoaster.height),
+        borderColor: styles.color.solids[0],
+        borderWidth: styles.color.alphas[1],
       },
     ],
   };
 
   const options = {
-    scale: {
-      gridLines: {
-        color: "#444",
-      },
-      pointLabels: {
-        fontColor: '#fff'
-      },
-      ticks: {
-        display: false,
-      },
-    },
     legend: {
       display: false,
     },
